@@ -7,6 +7,10 @@ const port = 80;
 app.use('/' , require('./routes/index.js'));  
 // or app.use('/' , require('./routes));
 
+// setting up view engine
+app.set('view engine' , 'ejs');
+app.set('views' , './views');
+
 app.listen(port , function(err){
     if(err) console.log(`Error in running server: ${err}`);
 
