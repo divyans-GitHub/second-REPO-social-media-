@@ -1,0 +1,6 @@
+
+/* common styling to all pages ,and put link in layout.ejs */
+body{
+    margin: 0;
+    text-align: center;
+}
