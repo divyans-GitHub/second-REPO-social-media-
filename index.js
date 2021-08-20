@@ -7,6 +7,8 @@ const expressLayouts = require('express-ejs-layouts');
 
 app.use(expressLayouts);
 
+const db = require('./config/mongoose');
+
 // extract styles and scripts from individual file into layout
 app.set('layout extractStyles' , true);
 app.set('layout extractScripts' , true);
