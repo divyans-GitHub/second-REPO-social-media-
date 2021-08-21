@@ -7,10 +7,11 @@ router.get('/profile' , userController.profile);
 const postController = require('../controllers/post_controller');
 router.get('/post' , postController.post);
 
-const signInController = require('../controllers/sign_in_controller');
-router.get('/sign-in' , signInController.signIn);
 
-const signUpController = require('../controllers/sign_in_controller');
-router.get('/sign-up' , signUpController.signUp);
+router.get('/sign-in' , userController.signIn);
+
+router.get('/sign-up' , userController.signUp);
+
+router.post('/create' , userController.create);
 
 module.exports = router;
