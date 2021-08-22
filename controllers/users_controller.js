@@ -3,9 +3,30 @@ const User = require('../models/users');
 
 module.exports.profile = function(req , res){
      //res.end('<h1> WELCOME TO USERS PROFILE </h1>');
-     return res.render('user_profile',{
-        title: "PROFILE"
-     });
+    if(req.cookies.user__id ){
+        // if user__id is present in the cookies
+         User.findById(req.cookies.user__id , function(err , user ){
+             if(err){
+                 console.log('Error in finding user after sign in :' , err);
+                 return;
+             }
+             if(user){
+                // if user is found with that id then only go to profile 
+                return res.render('user_profile',{
+                         title: `PROFILE: ${user.name}`,
+                         user: user
+                      });
+             }
+              //if some one changed cookie in browser then 
+              return res.redirect('/users/sign-in');
+         });
+    }else{
+        return res.redirect('/users/sign-in');
+    }
+    
+     //  return res.render('user_profile',{
+    //     title: "PROFILE"
+    //  });
 }
 // Here profile is called as action
 
