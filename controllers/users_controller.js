@@ -96,3 +96,8 @@ module.exports.createSession = function( req , res ){
   });
 
 }
+
+module.exports.signOut = function( req , res ){
+    res.cookie('user__id' , "");
+    return res.redirect('/users/sign-in');
+}
