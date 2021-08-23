@@ -51,5 +51,6 @@ module.exports.create = function( req , res ){
 
 // validate sigin data and sign in and create session for the user
 module.exports.createSession = function( req , res ){
-
+  // when you check out back to master this code remove
+  return res.redirect('/');
 }
