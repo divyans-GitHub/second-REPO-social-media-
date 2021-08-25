@@ -15,6 +15,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
+const MongoStore = require('connect-mongo');
+
 // middleware for reading form data
 app.use(express.urlencoded());
 //tell app to use cookie
@@ -33,6 +35,8 @@ app.use(express.static('./assets'));
 app.set('view engine' , 'ejs');
 app.set('views' , './views');
 
+
+// mongo store is used to store session cookie in the DB
 //MIDDLE WARE TO ENCRYPTS
 app.use(session({
     name: 'codeial',
@@ -41,7 +45,17 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: (1000 * 60 * 100)
-    }
+    },
+    store:  MongoStore.create(
+        {
+        // mongooseConnection: db,
+        mongoUrl: 'mongodb://localhost/codeial_development',
+        autoRemove: 'disabled'
+        }, function(err){
+            console.log(err || 'connect-mongo setup is done !');
+            return;
+        }
+    )
 }));
 
 app.use(passport.initialize());
