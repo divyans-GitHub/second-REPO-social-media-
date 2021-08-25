@@ -1,14 +1,17 @@
+
 const express = require('express');
 const router = express.Router();
 
-// importing passport here
-//const passport = require('passport');
-
 const userController = require('../controllers/users_controller');
-router.get('/profile' , userController.profile);
+// importing passport here
+const passport = require('passport');
+
+
+//making profile page accessible only to signed in user
+router.get('/profile' , passport.checkAuthentication , userController.profile);
+
 
 const postController = require('../controllers/post_controller');
-const passport = require('passport');
 router.get('/post' , postController.post);
 
 

@@ -47,9 +47,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(passport.setAuthenticatedUser);
+
 // use express router
-app.use('/' , require('./routes/index.js'));  
-// or app.use('/' , require('./routes));
+app.use('/' , require('./routes'));  
+// or app.use('/' , require('./routes/index.js));
 
 
 app.listen(port , function(err){
