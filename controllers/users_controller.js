@@ -61,3 +61,8 @@ module.exports.createSession = function( req , res ){
   // when you check out back to master this code remove
   return res.redirect('/');
 }
+
+module.exports.destroySession = function(req , res){
+    req.logout();
+    return res.redirect('/');
+}
