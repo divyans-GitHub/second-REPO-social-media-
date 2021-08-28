@@ -1,17 +1,19 @@
+
 /* common styling to all pages ,and put link in layout.ejs */
-html {
-  height: 100%;
+html{
+  height : 100%;
+  
 }
 
-body {
+body{
   margin: 0;
   text-align: center;
   height: 100%;
   background-color: mintcream;
-}
+  #layout-main{
+    height: 100%;
+  }
 
-body #layout-main {
-  height: 100%;
 }
 
 .card {
@@ -45,26 +47,26 @@ body #layout-main {
 
 .text-style {
   font-size: 1.2rem;
+  
   font-weight: 700;
   font-family: sans-serif;
 }
 
-.header-container {
+.header-container{
   background-color: aqua;
   height: 15%;
   display: flex;
   justify-content: space-between;
-  padding: 0.9rem;
+  padding:0.9rem;
 }
 
-.footer-container {
+.footer-container{
   background-color: lightsteelblue;
   height: 20%;
   display: flex;
-  justify-content: flex-start;
-  padding: 0.9rem;
+  justify-content:flex-start;
+  padding:0.9rem;
 }
-
-a {
+a{
   text-decoration: none;
 }

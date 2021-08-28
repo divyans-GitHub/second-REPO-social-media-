@@ -17,6 +17,17 @@ const passportLocal = require('./config/passport-local-strategy');
 
 const MongoStore = require('connect-mongo');
 
+const sassMiddleware = require('node-sass-middleware');
+
+app.use(sassMiddleware({
+    src: './assets/scss',
+    dest: './assets/css',
+    debug: true,
+    outputStyle: 'expanded',
+    prefix: '/css'
+}));
+
+
 // middleware for reading form data
 app.use(express.urlencoded());
 //tell app to use cookie
@@ -52,6 +63,7 @@ app.use(session({
         mongoUrl: 'mongodb://localhost/codeial_development',
         autoRemove: 'disabled'
         }, function(err){
+            // call back function in case connectioin is not established
             console.log(err || 'connect-mongo setup is done !');
             return;
         }

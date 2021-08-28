@@ -8,16 +8,22 @@
         <%= title %>
     </title>
     <link rel="stylesheet" href="/css/layout.css">
- 
+    
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/header.css">
+
+
     <%- style %>
   <!-- if stylesheet in individual file attach it here in layout  -->
 </head>
 <body>
     <%- include('_header'); -%>
-     
-   <%- body %>  
-    <!-- varible parts of layout which is filled by home.ejs or user_profile.ejs -->
     
+    <main id="layout-main">
+       <%- body %>  
+       <!-- varible parts of layout which is filled by home.ejs or user_profile.ejs -->
+    </main>
+
     <%- include('_footer'); -%>
 
     <%- script %>
