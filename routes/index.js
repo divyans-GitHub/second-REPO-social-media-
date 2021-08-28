@@ -9,7 +9,7 @@ router.use('/users' , require('./user'));
 //for any further routes , we access from here by
 // router.use('/router_name' , require('./router_file_name'));
 
-
+router.use( '/post' , require('./posts') );
 
 
 
