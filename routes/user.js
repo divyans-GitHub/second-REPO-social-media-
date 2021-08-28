@@ -12,7 +12,7 @@ router.get('/profile' , passport.checkAuthentication , userController.profile);
 
 
 const postController = require('../controllers/post_controller');
-router.get('/post' , postController.post);
+router.get('/post' ,passport.checkAuthentication, postController.post);
 
 
 router.get('/sign-in' , userController.signIn);

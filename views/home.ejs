@@ -4,20 +4,18 @@
        crossorigin="anonymous">
    <link rel="stylesheet" href="/css/home.css">
 
-              <h1>codial - Home - page - Title : <%= title %> </h1>
+              
 
               <div class="card">
                    <p class="text-style">Welcome </p>
                    <p class="text-style">in Codeial World</p>
-                   <!-- <div class="container">
-                        <a href="/users/sign-in">
-                            <i class="fas fa-user"></i>Sign In
-                        </a>
-                        <br> <br> <br>
-                        <span>create new account</span> &ensp;
-                        <a href="/users/sign-up">
-                            <i class="fas fa-user-plus"></i>Sign Up
-                        </a>
-                 </div> -->
              </div>
              <br> <br>
+<section id="feed-post">
+    <h2>Posts</h2>
+    <form action="/users/post" method="POST" id="new-post-form">
+      <textarea name="content" id="" cols="30" rows="5" placeholder="Write you feed here....."></textarea>
+       <input type="submit" value="Post">
+    </form>
+
+</section>

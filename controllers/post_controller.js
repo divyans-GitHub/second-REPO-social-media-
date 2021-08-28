@@ -1,4 +1,6 @@
 module.exports.post = function(req , res ){
-   res.end('<h1>this is my Post Please Hit Like</h1> ');
-
+   //res.end('<h1>this is my Post Please Hit Like</h1> ');
+  
+  
+   return res.redirect('/');
 }
