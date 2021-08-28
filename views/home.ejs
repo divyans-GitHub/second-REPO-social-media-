@@ -19,10 +19,13 @@
     </form>
 
     <div class="posts-list">
-        <ul>
+        <ul style="list-style:none;">
             <% for(post of posts){ %>
-              <li>
-                  <%= post.content %>
+              <li> <div class="post-container">
+                        <h4> <%= post.user.name %> </h4> 
+                          <%= post.content %>
+                   </div>
+                  
               </li>
             <%}%>
         </ul>
