@@ -9,6 +9,7 @@ const postSchema = new mongoose.Schema({
        type: mongoose.Schema.Types.ObjectId,
        ref: 'User'  //which models or collection does it refer to
    },
+   //including id of all comments in post schema itself
    comments: [
                 {
                     type: mongoose.Schema.Types.ObjectId,

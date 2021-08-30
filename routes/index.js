@@ -10,6 +10,9 @@ router.use('/users' , require('./user'));
 // router.use('/router_name' , require('./router_file_name'));
 
 router.use( '/post' , require('./posts') );
+// sending to comments.js if url is comming like "/comment" as usual
+router.use('/comment' , require('./comments') );
+
 
 
 
