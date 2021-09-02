@@ -17,7 +17,17 @@ module.exports.home = function(req , res ){
 //    });
 
    // populate the user of each post
-  Post.find({}).populate('user').exec(function(err , posts){
+  Post.find({})
+  .populate('user')
+  .populate({
+      //post.js file in models folder has field name as comments and user that is what mentioned in path
+
+      path: 'comments',
+      populate: {
+          path: 'user'
+      }
+  })
+  .exec(function(err , posts){
                                         if(err){
                                             console.log('error in findind post when home action is called');
                                             return;
