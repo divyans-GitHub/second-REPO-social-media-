@@ -23,7 +23,16 @@
         <ul style="list-style:none;">
             <% for(post of posts){ %>
               <li> <div class="post-container">
-                        <h4> <%= post.user.name %> </h4> 
+                        <% if(locals.user && locals.user.id == post.user.id ){ %>
+                             <small>
+                               <a href="/post/destroy/<%= post.id %>">
+                                <i class="fas fa-times-circle"></i>
+                              </a>
+                             </small>
+                        
+                        <%}%> 
+              
+                      <h4> <%= post.user.name %> </h4> 
                           <%= post.content %>
 
                           <div class="post-comment">

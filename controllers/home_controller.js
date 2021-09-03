@@ -20,7 +20,7 @@ module.exports.home = function(req , res ){
   Post.find({})
   .populate('user')
   .populate({
-      //post.js file in models folder has field name as comments and user that is what mentioned in path
+      //post.js file in models folder has field name as comments and user , that is what mentioned in path below
 
       path: 'comments',
       populate: {
