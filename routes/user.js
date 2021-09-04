@@ -8,7 +8,7 @@ const passport = require('passport');
 
 
 //making profile page accessible only to signed in user
-router.get('/profile' , passport.checkAuthentication , userController.profile);
+router.get('/profile/:id' , passport.checkAuthentication , userController.profile);
 
 
 

@@ -3,9 +3,16 @@ const User = require('../models/users');
 
 module.exports.profile = function(req , res){
      //res.end('<h1> WELCOME TO USERS PROFILE </h1>');
-     return res.render('user_profile',{
-        title: "PROFILE"
+     User.findById(req.params.id , function(err , user){
+           
+        return res.render('user_profile',{
+            title: "PROFILE",
+            profile_user: user // send each profile user when routes is invoked under friends section of home.ejs
+            // here we can't use user as key instead of profile_user as it is there in locals
+         });
+
      });
+    
 }
 // Here profile is called as action
 

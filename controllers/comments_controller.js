@@ -39,9 +39,10 @@ module.exports.destroy = function(req , res ){
          return;
      }
      if(comment){
-            if(comment.user == req.user.id ){
+          
+            if(comment.user == req.user.id || req.user.id == PostFound.user ){
                 let postId = comment.post;
-
+              //console.log("HERE IS " ,PostFound.user);
                 comment.remove();
 
                 Post.findByIdAndUpdate(postId , { $pull: {comments: req.params.id}} , function(err , post){

@@ -22,49 +22,7 @@
     <div class="posts-list">
         <ul style="list-style:none;">
             <% for(post of posts){ %>
-              <li> <div class="post-container">
-                        <% if(locals.user && locals.user.id == post.user.id ){ %>
-                             <small>
-                               <a href="/post/destroy/<%= post.id %>">
-                                <i class="fas fa-times-circle"></i>
-                              </a>
-                             </small>
-                        
-                        <%}%> 
-              
-                      <h4> <%= post.user.name %> </h4> 
-                          <%= post.content %>
-
-                          <div class="post-comment">
-                            <% if(locals.user){ %>
-                            <form action="/comment/create" method="POST">
-                             <input name="content" id="" placeholder="Write your comment here....." required>
-                             <input type="hidden" name="post" value="<%= post._id %>">
-                             <input type="submit" value="comment">
-                            </form>
-                            <% } %>
-                           <div class="post-comments-list">
-                             <ul id="post-comments-<%= post._id %>">
-                              <% for(comment of post.comments){ %> 
-                                <li>
-                                  <h5 style="display: inline;"> <%= comment.user.name%> :</h5>
-                                  <small> <%= comment.content %> </small>
-                                  <% if(locals.user && comment.user.id == locals.user.id ){%> 
-                                    <small>
-                                      <a href="/comment/destroy/<%= comment.id %>">
-                                        <i class="fas fa-times-circle"></i>
-                                      </a>
-                                    </small>
-                                  <% } %> 
-                                </li>
-                              <% } %>
-                             </ul>
-                           </div>
-                         </div>
-
-                   </div>
-                  
-              </li>
+               <%- include('_post') -%>
             <%}%>
         </ul>
         
@@ -72,4 +30,13 @@
 
 </section>
 
-
+<section id="friends-list">
+    <h3>FRIENDS</h3>
+    <% for(u of all_users){ %> 
+        <li>
+         <a href="/users/profile/<%= u.id %>"> <%= u.name %>  </a>  
+        </li>
+    <% } %>
+     
+     
+</section>

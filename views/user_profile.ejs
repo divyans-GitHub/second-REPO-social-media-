@@ -3,9 +3,14 @@
 
  <h1>Welcome to user's profile section</h1>
     
- <div>
-     <p> <%= user.name %>  </p>
+ <!-- <div>
+     <p> <%= user.name %>  </p>  //user from locals
      <p> <%= user.email %> </p>
- </div>  
+ </div>   -->
 
+ <div>
+     <!-- profile_user from users_controller.js -->
+    <p> <%= profile_user.name %>  </p>      
+    <p> <%= profile_user.email %> </p>
+</div>  
 
