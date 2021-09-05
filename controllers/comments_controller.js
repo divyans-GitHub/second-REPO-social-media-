@@ -39,8 +39,8 @@ module.exports.destroy = function(req , res ){
          return;
      }
      if(comment){
-          
-            if(comment.user == req.user.id || req.user.id == PostFound.user ){
+          //comment.user == req.user.id ||
+             if( req.user.id == post.user.id ){
                 let postId = comment.post;
               //console.log("HERE IS " ,PostFound.user);
                 comment.remove();

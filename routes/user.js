@@ -10,6 +10,8 @@ const passport = require('passport');
 //making profile page accessible only to signed in user
 router.get('/profile/:id' , passport.checkAuthentication , userController.profile);
 
+//router for updating user's information
+router.post('/update/:id' , passport.checkAuthentication , userController.update );
 
 
 
@@ -28,6 +30,9 @@ router.post('/create-session' , passport.authenticate(
 
 
 router.get('/sign-out' , userController.destroySession);
+
+
+
 
 
 module.exports = router;

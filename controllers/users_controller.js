@@ -16,6 +16,22 @@ module.exports.profile = function(req , res){
 }
 // Here profile is called as action
 
+
+//action for updating user's profile
+module.exports.update = function(req , res){
+    if(req.user.id == req.params.id ){
+
+        User.findByIdAndUpdate(req.params.id , req.body , function(err , updatedUser){
+            return res.redirect('back');
+        });
+    }else{
+        //sending http status code
+        return res.status(401).send("Unautherised user");
+    }
+}
+
+
+
 // actions for sign - in
 module.exports.signIn = function(req , res){
    if(req.isAuthenticated() ){
@@ -73,3 +89,11 @@ module.exports.destroySession = function(req , res){
     req.logout();
     return res.redirect('/');
 }
+
+
+
+
+
+
+
+
