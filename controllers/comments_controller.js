@@ -40,18 +40,22 @@ module.exports.destroy = function(req , res ){
      }
      if(comment){
           //comment.user == req.user.id ||
-             if( req.user.id == post.user.id ){
-                let postId = comment.post;
-              //console.log("HERE IS " ,PostFound.user);
-                comment.remove();
+          //var PostUser;
+          Post.findById(comment.post , function(err , post){
+             //console.log(post.content , post.user);
+             if( req.user.id == comment.user || req.user.id == post.user ){
+                  let postId = comment.post;
+            
+                  comment.remove();
 
-                Post.findByIdAndUpdate(postId , { $pull: {comments: req.params.id}} , function(err , post){
-                      if(err){console.log('error in finding comment inpost'); return;}
-                      return res.redirect('back');
-                } );
-                
-              
-            }
+                  Post.findByIdAndUpdate(postId , { $pull: {comments: req.params.id}} , function(err , post){
+                    if(err){console.log('error in finding comment inpost'); return;}
+                    return res.redirect('back');
+                  });
+                }
+          });
+               //console.log(postUser);
+             
      }else{
         return res.redirect('back'); 
      }
