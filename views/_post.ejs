@@ -1,18 +1,23 @@
 
 <li> <div class="post-container">
+  
+  <div class="post-head">
     <% if(locals.user && locals.user.id == post.user.id ){ %>
-         <small>
-           <a href="/post/destroy/<%= post.id %>">
-            <i class="fas fa-times-circle"></i>
-          </a>
-         </small>
-    
+          <small style="float: right;">
+            <a href="/post/destroy/<%= post.id %>">
+              <i class="fas fa-times-circle"></i>
+            </a>
+          </small>
+      
     <%}%> 
 
-  <h4> <%= post.user.name %> </h4> 
-      <%= post.content %>
-
-      <div class="post-comment">
+    <h4 style="display: inline;"> <%= post.user.name %> </h4> 
+ </div> 
+ <div class="post-body"> 
+    <p>        <%= post.content %> </p>  
+ </div>  
+ <div class="post-foot">
+      
         <% if(locals.user){ %>
         <form action="/comment/create" method="POST">
          <input name="content" id="" placeholder="Write your comment here....." required>
@@ -27,7 +32,9 @@
           <% } %>
          </ul>
        </div>
-     </div>
+
+  </div>     
+    
 
 </div>
 

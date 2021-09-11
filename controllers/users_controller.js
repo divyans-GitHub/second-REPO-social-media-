@@ -1,4 +1,4 @@
-
+// no need to use async await
 const User = require('../models/users');
 
 module.exports.profile = function(req , res){

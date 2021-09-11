@@ -3,6 +3,7 @@ const Post = require('../models/post');
 
 const User = require('../models/users');
 
+/*
 module.exports.home = function(req , res ){
    //console.log(req.cookies);
    //res.cookie('user_id' , 34);
@@ -18,7 +19,9 @@ module.exports.home = function(req , res ){
 //             });
 //    });
 
-   // populate the user of each post
+   
+
+  // populate the user of each post
   Post.find({})
   .populate('user')
   .populate({
@@ -46,3 +49,41 @@ module.exports.home = function(req , res ){
    
     // res.end('<h1>express is up for codeial </h1>');
 }
+*/
+
+
+// using async await we can be safe from this nested callbacks(callback hell)
+
+module.exports.home = async function( req , res ){
+    try{
+         let posts = await Post.find({})
+         .populate('user')
+         .populate({
+             //post.js file in models folder has field name as comments and user , that is what mentioned in path below
+       
+             path: 'comments',
+             populate: {
+                 path: 'user'
+             }
+         });
+         
+         let users = await User.find({});
+
+         return res.render('home' , {
+             title: 'Codeial: Home',
+             posts: posts,
+             all_users: users
+         });
+
+
+    }catch(err){
+        console.log('Error !' , err );
+        return;
+    }
+
+}
+
+
+
+
+
