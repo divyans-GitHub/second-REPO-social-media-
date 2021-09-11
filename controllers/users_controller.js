@@ -82,11 +82,14 @@ module.exports.create = function( req , res ){
 // validate sigin data and sign in and create session for the user
 module.exports.createSession = function( req , res ){
   // when you check out back to master this code remove
+
+  req.flash('success' , 'logged in successfully');
   return res.redirect('/');
 }
 
 module.exports.destroySession = function(req , res){
     req.logout();
+    req.flash('success' , 'You have logged out');
     return res.redirect('/');
 }
 

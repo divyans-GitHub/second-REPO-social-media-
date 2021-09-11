@@ -7,6 +7,8 @@
     <title>
         <%= title %>
     </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
     <link rel="stylesheet" href="/css/layout.css">
     
     <link rel="stylesheet" href="/css/footer.css">
@@ -19,6 +21,11 @@
 <body>
     <%- include('_header'); -%>
     
+        <!-- <% if(flash.success && flash.success.length > 0 ){ %>
+        <p style="background-color: red;"> <%= flash.success %>  </p> 
+        
+        <% } %> we ll use noty now -->
+
     <main id="layout-main">
        <%- body %>  
        <!-- varible parts of layout which is filled by home.ejs or user_profile.ejs -->
@@ -26,7 +33,34 @@
 
     <%- include('_footer'); -%>
 
+  <!-- if script tag in individual file attach it here in layout  -->
     <%- script %>
-<!-- if script tag in individual file attach it here in layout  -->
+
+    <script>
+      <% if(flash.success && flash.success.length > 0 ){ %> 
+         new Noty({
+            theme: 'relax',
+            text: '<%= flash.success %>',
+            type: 'success',
+            layout: 'top',
+            timeout: 1500 
+        
+          }).show();
+      <%}%>
+
+      <% if(flash.error && flash.error.length > 0 ){ %> 
+         new Noty({
+            theme: 'relax',
+            text: '<%= flash.error %>',
+            type: 'error',
+            layout: 'top',
+            timeout: 1500 
+        
+          }).show();
+      <%}%>
+
+    </script>
+
+
 </body>
 </html>
