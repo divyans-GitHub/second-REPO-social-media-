@@ -4,12 +4,31 @@ const Comment = require('../models/comment');
 
 module.exports.post =  async function(req , res ){
    //res.end('<h1>this is my Post Please Hit Like</h1> ');
+  try{
+     let post = await Post.create({
+      //storing data of form in post
+      content: req.body.content,
+      user:  req.user._id
+     });
+     
+     if(req.xhr){
+        return res.status(200).json({
+           data:{
+            post:post
+           },
+           message: "post created successfully"
+        })
+     }
+
+     req.flash('success' , "Post Published :)")
+
+     return res.redirect('back');
+
+  }catch(err){
+   req.flash('error' , err);
+   return res.redirect('back');
+ }
   
-   let post = await Post.create({
-     //storing data of form in post
-     content: req.body.content,
-     user:  req.user._id
-  });
 //   , function(err , post){
 //      if(err){
 //         console.log('Error ! in creating post');
@@ -17,9 +36,11 @@ module.exports.post =  async function(req , res ){
 //      }
 //      return res.redirect('back');
 //   });
-  // here not needded to convert but still doing
-return res.redirect('back');
+// here not needded to convert in async await but still doing
+
 }
+
+
 
 
 // module.exports.destroy =  function(req , res ){
@@ -58,15 +79,16 @@ module.exports.destroy = async function(req , res ){
          //delete comment associated with that post
          //for that require comment from models folder
          await Comment.deleteMany({post: req.params.id} );  
-        
+        req.flash('success' , "Post and associated comments get deleted!");
          return res.redirect('back');
       }else{
+         req.flash('error' , "you are not authorised to delete this post");
          return res.redirect('back');
       }
    
    }catch(err){
-      console.log("ERROR" , err);
-      return;
+      req.flash('error' , err);
+      return res.redirect('back');
    }
   
 }

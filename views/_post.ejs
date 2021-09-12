@@ -1,10 +1,11 @@
 
-<li> <div class="post-container">
+<li id="post-<%= post._id%>"> 
+  <div class="post-container">
   
   <div class="post-head">
     <% if(locals.user && locals.user.id == post.user.id ){ %>
           <small style="float: right;">
-            <a href="/post/destroy/<%= post.id %>">
+            <a class="delete-post-button" href="/post/destroy/<%= post.id %>">
               <i class="fas fa-times-circle"></i>
             </a>
           </small>
@@ -15,7 +16,9 @@
  </div> 
  <div class="post-body"> 
     <p>        <%= post.content %> </p>  
- </div>  
+ </div>
+ 
+ 
  <div class="post-foot">
       
         <% if(locals.user){ %>

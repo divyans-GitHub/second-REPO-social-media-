@@ -45,13 +45,14 @@ module.exports.create = async function(req , res ){
       post.comments.push(comment);
       //now save in DB
      post.save();
+     req.flash('success' , "Your comment is added");
      res.redirect('/');
 
     }
   
   }catch(err){
-    console.log("ERROR" , err);
-    return;
+    req.flash('error' , err);
+    return res.redirect('back');
   }
 }
 
@@ -110,7 +111,7 @@ module.exports.destroy = async function(req , res ){
         comment.remove();
   
         let correspondingPost = await Post.findByIdAndUpdate(postId , { $pull: {comments: req.params.id}} ); 
-          
+        req.flash('success' , 'comment is deleted');
         return res.redirect('back');
     
       }
@@ -118,8 +119,8 @@ module.exports.destroy = async function(req , res ){
     }else  return res.redirect('back'); 
   
   }catch(err){
-    console.log("ERROR" , err);
-    return;
+    req.flash('error' , err);
+    return res.redirect('back');
   }
   
        

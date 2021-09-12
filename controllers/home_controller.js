@@ -57,6 +57,7 @@ module.exports.home = function(req , res ){
 module.exports.home = async function( req , res ){
     try{
          let posts = await Post.find({})
+         .sort('-createdAt')
          .populate('user')
          .populate({
              //post.js file in models folder has field name as comments and user , that is what mentioned in path below
