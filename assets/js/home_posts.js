@@ -13,6 +13,7 @@
                success: function(data){
                 let newPost = newPostDOM(data.data.post);
                 $('.posts-list>ul').prepend(newPost);
+                deletePost($(' .delete-post-button' , newPost));
                },
                error: function(err){
                    console.log(error.reponseText);
@@ -31,7 +32,7 @@
                 <div class="post-head">
                
                     <small style="float: right;">
-                    <a class="delete-post-button" href="/post/destroy/${post.id}">
+                    <a class="delete-post-button" href="/post/destroy/${post._id}">
                         <i class="fas fa-times-circle"></i>
                     </a>
                     </small>
@@ -58,6 +59,31 @@
             
         </li>`);
    }
+
+
+
+   //method to delete post from DOM
+   let deletePost = function(deleteLink){
+    //1st step: I ld pass the a tag for delete post in deleteLink
+    $(deleteLink).click(function(e){
+        e.preventDefault();
+        //blocking natural behaviour
+        $.ajax({
+           type: 'get',
+           //you can use delete
+           url: $(deleteLink).prop('href'),
+           success: function(data){
+            // lets assume we have data as id of post which need to be deleted
+            $(`#post-${data.data.post_id}`).remove();
+           },
+           error: function(error){
+               console.log(error.reponseText);
+           }
+        });
+    });
+
+   }
+
 
    createPost();
    
