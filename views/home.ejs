@@ -27,7 +27,7 @@
        <input type="submit" value="Post">
     </form>
     <%}%>
-    <div class="posts-list">
+    <div id="posts-list-container">
         <ul style="list-style:none;">
             <% for(post of posts){ %>
                <%- include('_post') -%>
@@ -51,4 +51,6 @@
 
 </div>
 
+<!-- importing this script for creating the comments -->
+<script src="/js/home_post_comments.js" ></script>
 <script src="/js/home_posts.js"></script>

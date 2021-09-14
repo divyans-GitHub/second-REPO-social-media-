@@ -1,11 +1,11 @@
 
- <li>
+ <li id="comment-<%= comment.id %>">
     <h5 style="display: inline;"> <%= comment.user.name%> :</h5>
     <small> <%= comment.content %> </small>
     <% if(locals.user && ( locals.user.id == comment.user.id  || locals.user.id == post.user.id ) ){%> 
        
       <small>
-        <a href="/comment/destroy/<%= comment.id %>">
+        <a href="/comment/destroy/<%= comment.id %>" class="delete-comment-button">
           <i class="fas fa-times-circle"></i>
         </a>
       </small>

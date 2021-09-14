@@ -22,7 +22,7 @@
  <div class="post-foot">
       
         <% if(locals.user){ %>
-        <form action="/comment/create" method="POST">
+        <form action="/comment/create" method="POST" id="post-<%=post.id%>-comments-form">
          <input name="content" id="" placeholder="Write your comment here....." required>
          <input type="hidden" name="post" value="<%= post._id %>">
          <input type="submit" value="comment">

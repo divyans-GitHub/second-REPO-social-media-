@@ -64,7 +64,7 @@ module.exports.home = async function( req , res ){
        
              path: 'comments',
              populate: {
-                 path: 'user'
+                path: 'user'
              }
          });
          

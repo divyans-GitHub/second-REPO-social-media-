@@ -12,6 +12,7 @@ module.exports.post =  async function(req , res ){
      });
      
      if(req.xhr){
+        await post.populate('user').execPopulate();
         return res.status(200).json({
            data:{
             post:post
