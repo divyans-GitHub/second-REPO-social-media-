@@ -21,6 +21,7 @@ const sassMiddleware = require('node-sass-middleware');
 
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
+const multer  = require('multer')
 
 app.use(sassMiddleware({
     src: './assets/scss',
@@ -44,6 +45,9 @@ app.set('layout extractScripts' , true);
 
 // for using static files
 app.use(express.static('./assets'));
+
+//make the path uploads available for browser
+app.use('/uploads' , express.static(__dirname  + '/uploads'));
 
 // setting up view engine
 app.set('view engine' , 'ejs');

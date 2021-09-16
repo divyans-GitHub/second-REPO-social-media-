@@ -1,7 +1,7 @@
 
     <link rel="stylesheet" href="/css/user_profile.css"> 
 
- <h1>Welcome to user's profile section</h1>
+ <h1> Profile </h1>
     
  <!-- <div>
      <p> <%= user.name %>  </p>  //user from locals
@@ -14,12 +14,18 @@
     <p> <%= profile_user.email %> </p>
 </div>   -->
 
- <% if(user.id == profile_user.id){ %> 
+
+ <!-- showing profile picture on user's profile page -->
+ <img src="<%=user.avatar%>" alt="<%= user.name %>" width="100">
+
+
   <!-- if loggedin user matches show update form -->
+  <% if(user.id == profile_user.id){ %>
     <div id="update-form">
-        <form action="/users/update/<%= user.id%>" method="POST">
+        <form action="/users/update/<%= user.id%>" enctype="multipart/form-data" method="POST">
           <input type="email" name="email" value="<%= profile_user.email %>" placeholder="enter new email" required>
           <input type="text" name="name" value="<%= profile_user.name %>" placeholder="enter new name" required>
+          <input type="file" name="avatar" placeholder="profile picture">
           <input type="submit" value="Update"> 
         </form>
 

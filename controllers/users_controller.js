@@ -1,5 +1,8 @@
 // no need to use async await
 const User = require('../models/users');
+const fs = require('fs');
+const path = require('path');
+
 
 module.exports.profile = function(req , res){
      //res.end('<h1> WELCOME TO USERS PROFILE </h1>');
@@ -18,16 +21,57 @@ module.exports.profile = function(req , res){
 
 
 //action for updating user's profile
-module.exports.update = function(req , res){
-    if(req.user.id == req.params.id ){
+module.exports.update = async function(req , res){
+    // if(req.user.id == req.params.id ){
 
-        User.findByIdAndUpdate(req.params.id , req.body , function(err , updatedUser){
-            return res.redirect('back');
+    //     User.findByIdAndUpdate(req.params.id , req.body , function(err , updatedUser){
+    //         return res.redirect('back');
+    //     });
+    // }else{
+    //     //sending http status code
+    //     return res.status(401).send("Unautherised user");
+    // }
+
+    if(req.user.id == req.params.id ){
+       try{
+          let user = await User.findById(req.params.id);
+          User.uploadedAvatar( req , res , function(err){
+          if(err){
+            console.log("***multer Error***" , err);
+            return;
+          }
+          
+          user.name = req.body.name;
+          user.email = req.body.email;
+          console.log("request file details: " , req.file );
+
+          if(req.file){
+            
+            
+            //for deleting path we need fs module and path module 
+            if(user.avatar){
+                fs.unlinkSync(path.join(__dirname , '..' , user.avatar));
+            }
+
+
+            //saving the path of upload file into the avatar feild in user schema
+            user.avatar = User.avatarPath + '/' + req.file.filename;
+            
+            //console.log(User.avatarPath , "*********" , user.avatar);
+            
+          }
+          user.save();
+          return res.redirect('back');
         });
+
+       }catch(err){
+        req.flash('error' , err);
+        return res.redirect('back');
+       }
     }else{
-        //sending http status code
         return res.status(401).send("Unautherised user");
     }
+
 }
 
 
