@@ -13,7 +13,7 @@ router.use( '/post' , require('./posts') );
 // sending to comments.js if url is comming like "/comment" as usual
 router.use('/comment' , require('./comments') );
 
-
+router.use('/api' , require('./api'));
 
 
 console.log('router is loaded');
