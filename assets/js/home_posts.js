@@ -1,4 +1,8 @@
 {
+
+   
+
+
     // method to submit form of new form using AJAX
     let createPost = function(){
         let newPostForm = $('#new-post-form');
@@ -136,7 +140,6 @@
    convertPostsToAjax();
 
 
-
-
+  
 
 }

@@ -1,5 +1,11 @@
 
-  
+  function loadPreview(event){
+   
+    $('#preview-img').attr('src' ,  URL.createObjectURL(event.target.files[0]));
+  }
+
+
+
    // Let's implement this via classes
 
    // this class would be initialized for every post on the page

@@ -49,16 +49,21 @@ module.exports.update = async function(req , res){
             
             
             // //for deleting path we need fs module and path module 
-            if(user.avatar){
-                fs.unlinkSync(path.join(__dirname , '..' , user.avatar));
+            // if(user.avatar){
+            //     fs.unlinkSync(path.join(__dirname , '..' , user.avatar));
                
-            }
-        //    fs.readdir(req.file.destination,function(err , file){
-        //        if(err){console.log("error in finding files")}
-        //        if(file || user.avatar){
-        //         fs.unlinkSync(path.join(__dirname , '..' , user.avatar));
-        //        }
-        //    } );
+            // }
+            
+
+
+                if(fs.existsSync(path.join(__dirname , '..' , user.avatar))){
+                
+                if(user.avatar){
+                fs.unlinkSync(path.join(__dirname , '..' , user.avatar))
+                
+                
+                }}
+        
 
             //saving the path of upload file into the avatar feild in user schema
               user.avatar = User.avatarPath + '/' + req.file.filename;
