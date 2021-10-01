@@ -1,6 +1,10 @@
 
 const Post = require('../../../models/post');
 const Comment = require('../../../models/comment');
+const { post } = require('../../../routes/api/v1/post');
+
+const User = require('../../../models/users');
+
 
 module.exports.index = async function(req , res){
     
@@ -24,40 +28,30 @@ module.exports.index = async function(req , res){
 
 module.exports.destroy = async function(req , res ){
     try{
-        console.log(req.params.id);
-       let post = await Post.findById(req.params.id);
-      
-       
-         
-         post.remove();
-          //delete comment associated with that post
-          //for that require comment from models folder
-          await Comment.deleteMany({post: req.params.id} );  
-          
-        //   if(req.xhr){
-        //      return res.status(200).json({
-        //         data: {
-        //            post_id: req.params.id
-        //         },
-        //         message: "Post Deleted"
-        //      })
-        //   }
- 
-          //req.flash('success' , "Post and associated comments get deleted!");
-          return res.status(200).json({
-              message: "post and its comments deleted"
-          });
-      // }else{
-         // req.flash('error' , "you are not authorised to delete this post");
-         // return res.redirect('back');
-      // }
-    
+        let post = await Post.findById(req.params.id);
+        if(post.user == req.user.id ){
+            post.remove();
+            //delete comment associated with that post
+            //for that require comment from models folder
+            await Comment.deleteMany({post: req.params.id} );  
+            
+
+            //req.flash('success' , "Post and associated comments get deleted!");
+            return res.status(200).json({
+             message: "post and its comments deleted"
+            });
+        }else{
+            return res.json(401 , {
+                message: "You can not delete this post!"
+            })
+        }
+
     }catch(err){
         console.log(err);
-       return res.status(500).json({
-           message: 'Internal server error'
-          
-       });
+        return res.status(500).json({
+            message: 'Internal server error'
+        
+        });
     }
    
- }
+}
