@@ -32,6 +32,17 @@ router.post('/create-session' , passport.authenticate(
 router.get('/sign-out' , userController.destroySession);
 
 
+//route to send request to google
+router.get('/auth/google' , passport.authenticate('google',{scope: ['profile' , 'email']}) );
+// router for callbackURL
+router.get(
+    '/auth/google/callback',
+    passport.authenticate(
+        'google',
+        {failureRedirect: 'users/sign-in'}
+    ),
+    userController.createSession
+);
 
 
 
