@@ -64,3 +64,32 @@ body #layout-main {
 a {
   text-decoration: none;
 }
+
+.form {
+  height: fit-content;
+  width: fit-content;
+  border: 2px solid blue;
+  background-color: aliceblue;
+  margin: auto;
+  padding: 0.8rem;
+}
+
+.form button {
+  border: none;
+  border-radius: 46%;
+  padding: 5px;
+  color: whitesmoke;
+  background-color: blue;
+}
+
+.social-auth {
+  height: fit-content;
+  width: fit-content;
+  padding: 5px;
+  margin: auto;
+  background-color: blue;
+}
+
+.social-auth a {
+  color: whitesmoke;
+}

@@ -17,8 +17,8 @@ passport.use(new googleStrategy({
             console.log("error in using google-oauth-strategy" , err); 
             return;
             } 
-            console.log(profile);
-
+            //console.log(profile);
+            //console.log(accessToken , refreshToken);
             if(user){
                 //if user found in DB , set it as req.user
                 return done(null , user);

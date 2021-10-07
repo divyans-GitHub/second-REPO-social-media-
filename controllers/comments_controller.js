@@ -1,6 +1,8 @@
 
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const User = require('../models/users')
+const commentsMailer = require('../mailers/comments_mailer');
 
 // module.exports.create = function(req , res ){
 //   //we first find post by post id in hidden input form such that no one feedle and change post id by inspecting
@@ -31,6 +33,7 @@ const Post = require('../models/post');
 
 // }
 
+/*
 //using async await
 module.exports.create = async function(req , res ){
   try{
@@ -45,8 +48,18 @@ module.exports.create = async function(req , res ){
       post.comments.push(comment);
       //now save in DB
      post.save();
+
+
+
+     let user = await User.findById(req.user._id);
+     //console.log(user.email);
+     //comment.populate('user' , 'name email').execPopulate().sort('-createdAt');
+     commentsMailer.newComment(user.email);
+
      
+     //  commentsMailer.newComment(comment);
      if(req.xhr){
+        // put in line 51 for populating everytime
         await comment.execPopulate('user').sort('-createdAt');
        return res.status(200).json({
          data :{
@@ -66,8 +79,49 @@ module.exports.create = async function(req , res ){
     return res.redirect('back');
   }
 }
+*/
 
 
+
+module.exports.create = async function(req , res ){
+  try{
+    let post = await Post.findById(req.body.post);
+  
+    if(post){
+     let comment = await Comment.create({
+             content: req.body.content,
+             post: req.body.post,
+             user: req.user._id
+      });
+      post.comments.push(comment);
+      //now save in DB
+     post.save();
+      
+     let user = await User.findById(req.user._id);
+     //console.log(user.email);
+     //comment.populate('user' , 'name email').execPopulate().sort('-createdAt');
+     commentsMailer.newComment(user.email);
+     
+     if(req.xhr){
+      
+       return res.status(200).json({
+         data :{
+          comment: comment
+         },
+         message: "comment added successfully"
+       })
+     }
+
+     req.flash('success' , "Your comment is added");
+     res.redirect('/');
+
+    }
+  
+  }catch(err){
+    req.flash('error' , err);
+    return res.redirect('back');
+  }
+}
 
 
 
