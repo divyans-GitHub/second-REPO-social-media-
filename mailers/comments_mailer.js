@@ -29,14 +29,15 @@ exports.newComment = (userMail) => {
 const nodeMailer = require('../config/nodemailer');
 
 // this is another way of exporting a method
-exports.newComment = (userMail) => {
+exports.newComment = (userMail , comment) => {
     console.log("inside newComment mailer" );
+    let HTMLString = nodeMailer.renderTemplate({comment: comment} , '/comments/new_comment.ejs');
 
     nodeMailer.transporter.sendMail({
        from: 'divyanshuji123456@gmail.com',
        to: userMail,
        subject: "New comment on CODEIAL",
-       html: '<h1> Your comment has been published</h1>'
+       html: HTMLString
     },
     (err , info) => {
        if(err){

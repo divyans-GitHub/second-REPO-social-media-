@@ -4,6 +4,9 @@ const Post = require('../models/post');
 const User = require('../models/users')
 const commentsMailer = require('../mailers/comments_mailer');
 
+const queue = require('../config/kue');
+const commentEmailWorker = require('../kue_workers/comment_email_worker');
+
 // module.exports.create = function(req , res ){
 //   //we first find post by post id in hidden input form such that no one feedle and change post id by inspecting
    
@@ -33,31 +36,13 @@ const commentsMailer = require('../mailers/comments_mailer');
 
 // }
 
-/*
+/*  some changed part that was not working
 //using async await
 module.exports.create = async function(req , res ){
-  try{
-    let post =await Post.findById(req.body.post);
   
-    if(post){
-     let comment = await Comment.create({
-             content: req.body.content,
-             post: req.body.post,
-             user: req.user._id
-      });
-      post.comments.push(comment);
-      //now save in DB
-     post.save();
-
-
-
-     let user = await User.findById(req.user._id);
-     //console.log(user.email);
-     //comment.populate('user' , 'name email').execPopulate().sort('-createdAt');
-     commentsMailer.newComment(user.email);
-
-     
-     //  commentsMailer.newComment(comment);
+ //comment.populate('user' , 'name email').execPopulate().sort('-createdAt');
+    
+   //  commentsMailer.newComment(comment);
      if(req.xhr){
         // put in line 51 for populating everytime
         await comment.execPopulate('user').sort('-createdAt');
@@ -66,18 +51,7 @@ module.exports.create = async function(req , res ){
           comment: comment
          },
          message: "comment added successfully"
-       })
-     }
-
-     req.flash('success' , "Your comment is added");
-     res.redirect('/');
-
-    }
-  
-  }catch(err){
-    req.flash('error' , err);
-    return res.redirect('back');
-  }
+       }) 
 }
 */
 
@@ -100,8 +74,20 @@ module.exports.create = async function(req , res ){
      let user = await User.findById(req.user._id);
      //console.log(user.email);
      //comment.populate('user' , 'name email').execPopulate().sort('-createdAt');
-     commentsMailer.newComment(user.email);
-     
+     comment.execPopulate('user');
+     /*
+     commentsMailer.newComment(user.email , comment);
+     commenting this part because this will now done by workers
+     */
+      let job = queue.create('emails' , comment ).save( function(err){
+        if(err){
+         console.log('ERROR in creating a job' , err);
+         return;
+        }
+        console.log('JOB ENQUEUED' , job.id );
+      });
+
+
      if(req.xhr){
       
        return res.status(200).json({
