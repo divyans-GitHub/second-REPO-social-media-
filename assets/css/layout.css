@@ -93,3 +93,14 @@ a {
 .social-auth a {
   color: whitesmoke;
 }
+
+#forgetPassForm {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  display: none;
+  width: 200px;
+  height: 100px;
+  border: 2px solid lightgrey;
+  background-color: lightskyblue;
+}

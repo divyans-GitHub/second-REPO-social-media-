@@ -3,6 +3,9 @@ const User = require('../models/users');
 const fs = require('fs');
 const path = require('path');
 
+const ResetPassToken = require('../models/resetPasswordToken');
+const mailer = require('../mailers/password_mailer');
+const crypto = require('crypto');
 
 module.exports.profile = function(req , res){
      //res.end('<h1> WELCOME TO USERS PROFILE </h1>');
@@ -149,7 +152,74 @@ module.exports.destroySession = function(req , res){
 }
 
 
+module.exports.resetPassword = function(req ,  res ){
+  // console.log(req.body);
+  
+  User.findOne({email: req.body.email} , function(err , user){
+    if(err){
+        console.log("Invalid Email Id" , err);
+        return;
+    }
+    if(user){
+        ResetPassToken.create({
+          accesstoken: crypto.randomBytes(20).toString('hex'),
+          isValid: true,
+          user: user.id
+        }, function(err , token){
+          if(err) {
+            console.log("ERROR IN CREATING TOKEN" , err);
+            return;
+          }
+          mailer.resetPassword(req.body.email , token );
+          return res.redirect('back');
+        });
+    }else {
+        console.log("Invalid Email Id" );
+        return;
+    }
+  });
+ 
+}
 
+
+module.exports.createNewPass = function(req , res ){
+    //console.log(req.query);
+    // here we need to pass resetPassToken to ejs file so that we can check whether token is valid?
+
+  ResetPassToken.findOne({accesstoken: req.query.accesstoken} , function(err , token ){
+    if(err){
+       console.log(err , " error in finding token");
+       return;
+    }
+    
+    return res.render('resetPassword' , {
+        title: "Reset Password",
+        reset_pass_token: token
+     });
+
+  });  
+}
+
+
+module.exports.addNewPass = function(req , res ){
+    if( req.body.password == req.body.ReNewPassword ){
+
+        ResetPassToken.findOne({accesstoken: req.query.accesstoken} , function(err , token ){
+            if(err){
+            console.log(err , " error in finding token");
+            return;
+            }
+            User.findById(token.user , function(err , userr){
+            userr.password = req.body.newPassword;
+            userr.save();
+            });
+            
+            token.isValid = false;
+            token.save();
+            return res.redirect('/users/sign-in');
+        })
+    }else return res.redirect('back');
+}
 
 
 

@@ -13,10 +13,17 @@
             <label for="#pass">Password</label>
             <input type="password" name="password" id="pass" placeholder="enter your Password" required>
               <br> <br>
-            <a href=""> forget Password?</a>
+            <a href="" id="forgetPass"> forget Password?</a>
             <button type="submit">Login</button>
             
         </form>
   </div>
 </div>
 <br>
+
+<div id="forgetPassForm">
+  <form action="/users/reset" method="post">
+    <input type="email" name="email"  placeholder="enter registered email id" required>
+    <button type="submit"> submit </button>
+  </form>
+</div>
