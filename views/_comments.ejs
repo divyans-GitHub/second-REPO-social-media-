@@ -10,4 +10,14 @@
         </a>
       </small>
     <% } %> 
+
+    <% if(locals.user){ %>
+      <a href="/likes/toggle/?id=<%=comment._id%>&type=Comment"  class ="like-button"  data-likes="<%=comment.likes.length %>">
+        <i class="fas fa-thumbs-up"></i> <%=comment.likes.length %>
+      </a>  
+      &ensp;
+    <% }else{ %> 
+      <i class="fas fa-thumbs-up"></i>
+      <%=comment.likes.length %> 
+    <%}%>
   </li>

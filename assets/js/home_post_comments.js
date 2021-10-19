@@ -1,4 +1,3 @@
-
   function loadPreview(event){
    
     $('#preview-img').attr('src' ,  URL.createObjectURL(event.target.files[0]));
@@ -14,6 +13,7 @@
   });
  
 
+  
 
    // Let's implement this via classes
 
@@ -52,6 +52,12 @@
                         let newComment = pSelf.newCommentDom(data.data.comment);
                         $(`#post-comments-${postId}`).prepend(newComment);
                         pSelf.deleteComment($(' .delete-comment-button', newComment));
+                        //console.log( "%%%%%%%%%" , $('.like-button' , newComment));
+                        
+                        // keeping an instance of class for each new comment made
+                        // same thing for post also
+                        // since we want unique like count and toggle button for each post and comments
+                        new ToggleLike($('.like-button' , newComment));
 
                         new Noty({
                             theme: 'relax',
@@ -84,6 +90,9 @@
                         <i class="fas fa-times-circle"></i>
                     </a>
                     </small>
+
+                    <a href="/likes/toggle/?id=${comment._id}&type=Comment"  class ="like-button" data-likes="0"> <i class="fas fa-thumbs-up"></i> 0</a>  
+                     &ensp;
             
                 </li>`
             );

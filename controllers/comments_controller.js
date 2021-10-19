@@ -7,6 +7,8 @@ const commentsMailer = require('../mailers/comments_mailer');
 const queue = require('../config/kue');
 const commentEmailWorker = require('../kue_workers/comment_email_worker');
 
+const Like = require('../models/like');
+
 // module.exports.create = function(req , res ){
 //   //we first find post by post id in hidden input form such that no one feedle and change post id by inspecting
    
@@ -158,10 +160,15 @@ module.exports.destroy = async function(req , res ){
       
       if( req.user.id == comment.user || req.user.id == post.user ){
         let postId = comment.post;
-  
+        
+        await Like.deleteMany({likeable: comment._id , onModel: 'Comment'});
+
         comment.remove();
   
         let correspondingPost = await Post.findByIdAndUpdate(postId , { $pull: {comments: req.params.id}} ); 
+        
+        
+        
         if(req.xhr){
           return res.status(200).json({
             data :{

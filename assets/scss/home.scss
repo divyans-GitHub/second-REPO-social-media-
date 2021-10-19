@@ -12,11 +12,17 @@
         padding:5px;
         text-align: center;
     }
-    #friends-list{
+    #aside{
         width: 25%;
        padding:5px;
        border-left: 1px solid lightgrey;
        height: 100vh;
+       display: flex;
+       flex-direction: column;
+       #friends-list{
+           border-bottom: 1px solid lightgrey;
+           height: 50%;
+       }
     }
 }
 

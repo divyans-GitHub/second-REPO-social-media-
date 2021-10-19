@@ -104,3 +104,15 @@ a {
   border: 2px solid lightgrey;
   background-color: lightskyblue;
 }
+
+.like-button {
+  display: inline;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: medium;
+}
+
+.post-foot form {
+  display: inline;
+}

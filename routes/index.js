@@ -15,6 +15,8 @@ router.use('/comment' , require('./comments') );
 
 router.use('/api' , require('./api'));
 
+router.use('/likes' , require('./likes'));
+
 
 console.log('router is loaded');
 

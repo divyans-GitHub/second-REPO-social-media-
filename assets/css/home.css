@@ -16,11 +16,18 @@
   text-align: center;
 }
 
-#home-container #friends-list {
+#home-container #aside {
   width: 25%;
   padding: 5px;
   border-left: 1px solid lightgrey;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#home-container #aside #friends-list {
+  border-bottom: 1px solid lightgrey;
+  height: 50%;
 }
 
 .post-container {

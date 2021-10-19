@@ -20,6 +20,15 @@
  
  
  <div class="post-foot">
+      <% if(locals.user){ %>
+        <a href="/likes/toggle/?id=<%=post._id%>&type=Post"  class ="like-button"  data-likes="<%=post.likes.length %>">
+          <i class="fas fa-thumbs-up"></i> <%=post.likes.length %>
+        </a>  
+        &ensp;
+      <% }else{ %> 
+        <i class="fas fa-thumbs-up"></i>
+        <%=post.likes.length %> 
+      <%}%>
       
         <% if(locals.user){ %>
         <form action="/comment/create" method="POST" id="post-<%=post.id%>-comments-form">

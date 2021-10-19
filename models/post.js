@@ -11,13 +11,18 @@ const postSchema = new mongoose.Schema({
    },
    //including id of all comments in post schema itself
    comments: [
-                {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: 'Comment',
-                   // sort: createdAt
-                }
-   
-         ]
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment',
+            // sort: createdAt
+        }
+    ],
+    likes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Like'
+        }
+    ]
 
 },{
     timestamps: true
