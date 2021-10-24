@@ -93,7 +93,8 @@ module.exports.update = async function(req , res){
 // actions for sign - in
 module.exports.signIn = function(req , res){
    if(req.isAuthenticated() ){
-       return res.redirect('/users/profile');
+     
+     return res.redirect('/users/profile');
    }
    
     return res.render('sign_in' , {

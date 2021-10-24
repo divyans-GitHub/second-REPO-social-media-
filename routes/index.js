@@ -17,7 +17,6 @@ router.use('/api' , require('./api'));
 
 router.use('/likes' , require('./likes'));
 
-
 console.log('router is loaded');
 
 module.exports = router;

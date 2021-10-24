@@ -49,4 +49,12 @@ router.post('/reset' , userController.resetPassword );
 router.get('/reset_password/' , userController.createNewPass )
 router.post('/reset_password/' , userController.addNewPass );
 
+
+router.use('/add-friend' , require('./friendship') );
+
+
+
+
+
+
 module.exports = router;

@@ -1,17 +1,5 @@
-  function loadPreview(event){
-   
-    $('#preview-img').attr('src' ,  URL.createObjectURL(event.target.files[0]));
-  }
-
-  var hiddenBox = $( "#forgetPassForm" );
   
-
-  $( "#forgetPass" ).on( "click", function( event ) {
-    event.preventDefault();
-    hiddenBox.show();
-    $('.card').hide();
-  });
- 
+  
 
   
 

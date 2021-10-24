@@ -1,18 +1,18 @@
 
-    <link rel="stylesheet" href="/css/user_profile.css"> 
+<link rel="stylesheet" href="/css/user_profile.css"> 
 
  <h1> Profile </h1>
     
- <!-- <div>
-     <p> <%= user.name %>  </p>  //user from locals
-     <p> <%= user.email %> </p>
- </div>   -->
+    <!-- <div>
+        <p> <%= user.name %>  </p>  //user from locals
+        <p> <%= user.email %> </p>
+    </div>   -->
 
- <!-- <div>
-     <!- profile_user from users_controller.js ->
-    <p> <%= profile_user.name %>  </p>      
-    <p> <%= profile_user.email %> </p>
-</div>   -->
+    <!-- <div>
+        <!- profile_user from users_controller.js ->
+        <p> <%= profile_user.name %>  </p>      
+        <p> <%= profile_user.email %> </p>
+    </div>   -->
 
 
  <!-- showing profile picture on user's profile page -->
@@ -30,8 +30,9 @@
         </form>
 
     </div>
+
     <div id="preview-profile-picture">
-        <img id="preview-img" src="" alt="preview-picture" width="100%" height="100%">
+      <img id="preview-img" src="" alt="preview-picture" width="100%" height="100%">
     </div>
  
  
@@ -39,6 +40,27 @@
     <!-- else show only profile page -->
     <p> <%= profile_user.name %>  </p>      
     <p> <%= profile_user.email %> </p>
- <% }%>
+  <% }%>
 
- <script src="/js/home_post_comments.js" ></script>
+ 
+  <a href="/users/add-friend/?from_user=<%= user.id%>&to_user=<%=profile_user.id%>"  class="click-to-add"> Add Friend </a>
+
+
+
+<script >
+  function loadPreview(event){
+   
+   $('#preview-img').attr('src' ,  URL.createObjectURL(event.target.files[0]));
+ }
+
+</script>
+<script src="/js/friendship.js"></script>
+<script>
+
+$('.click-to-add').each( function(){
+    let self = this;
+    let element = new addFriends(self);
+  });
+</script>
+
+

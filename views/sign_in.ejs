@@ -27,3 +27,16 @@
     <button type="submit"> submit </button>
   </form>
 </div>
+
+<script>
+
+var hiddenBox = $( "#forgetPassForm" );
+  
+
+  $( "#forgetPass" ).on( "click", function( event ) {
+    event.preventDefault();
+    hiddenBox.show();
+    $('.card').hide();
+  });
+ 
+</script>
