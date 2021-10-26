@@ -5,10 +5,12 @@ const crypto = require('crypto');
 
 const User = require('../models/users');
 
+const env = require('./environment');
+
 passport.use(new googleStrategy({
-        clientID: "387786437534-u5j7p8g9l946phdokg0i5jb89esiubps.apps.googleusercontent.com",
-        clientSecret: "P525bSp7Px7pcdKX08LTc0HK",
-        callbackURL: "http://localhost:80/users/auth/google/callback"
+        clientID: env.google_client_id,
+        clientSecret: env.google_client_secret,
+        callbackURL: env.google_callbackURL
     },
 
     function(accessToken , refreshToken ,profile , done){

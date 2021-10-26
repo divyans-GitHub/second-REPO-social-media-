@@ -5,13 +5,17 @@ const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 const User = require('../models/users');
 
+const env = require('./environment');
+
 let opts = {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'codeial'
+    secretOrKey: env.jwt_secret
+    // we have used that key in users_api of controller , change there also
 }
 
 // this is after once the JWT is created
 passport.use(new JWTStrategy( opts , function(jwtPayLoad , done){
+    console.log(opts.secretOrKey , "**********");
    User.findById(jwtPayLoad._id , function(err , user ){
        if(err){
            console.log("user is not found"); return;

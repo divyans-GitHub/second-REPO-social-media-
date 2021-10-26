@@ -1,0 +1,1 @@
+class addFriends{constructor(e){this.element=e,this.showFriend()}showFriend(){$(this.element).click(function(e){e.preventDefault();let t=this;$.ajax({type:"GET",url:$(t).attr("href")}).done(function(e){1==e.isFriend?$(t).html("Remove Friend"):$(t).html("Add Friend")}).fail(function(e){console.log("error in completing request")})})}}
