@@ -6,6 +6,9 @@ const env = require('./config/environment');
 const logger = require('morgan');
 
 const app = express();
+
+require('./config/view-helper')(app);
+
 const cookieParser = require('cookie-parser');
 
 const port = 800;

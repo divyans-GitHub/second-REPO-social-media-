@@ -3,15 +3,15 @@
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" 
        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" 
        crossorigin="anonymous">
-   <link rel="stylesheet" href="/css/home.css">
-   <link rel="stylesheet" href="/css/chat_box.css">
+   <link rel="stylesheet" href="<%= assetPath('css/home.css')%>">
+   <link rel="stylesheet" href="<%= assetPath('css/chat_box.css')%>">
               
 
-              <div class="card">
-                   <p class="text-style">Welcome </p>
-                   <p class="text-style">in Codeial World</p>
-             </div>
-             <br> <br>
+    <div class="card">
+        <p class="text-style">Welcome </p>
+        <p class="text-style">in Codeial World</p>
+    </div>
+    <br> <br>
 
 <div id="home-container">
 
@@ -31,7 +31,7 @@
     <div id="posts-list-container">
         <ul style="list-style:none;">
             <% for(post of posts){ %>
-               <%- include('_post') -%>
+               <%- include('_post'); %>
             <%}%>
         </ul>
         
@@ -43,14 +43,13 @@
     <section id="friends-list">
     <h3> Friends</h3>
     <% if(locals.user){ %>  
-    <ul id="friends-list-name">
-      <% for(friend of loggedInUser.friendships ){ %>
-       
-        <li><%= friend.to_user.name %></li>
-      <%}%>
+     <ul id="friends-list-name">
+        <% for(friend of loggedInUser.friendships ){ %>
+        
+            <li><%= friend.to_user.name %></li>
+        <%}%>
 
-     
-    </ul>
+     </ul>
     <%}%>
     </section>
 
@@ -67,12 +66,16 @@
      
 </section>
 
-<%- include('_chat') -%>
+<%- include('_chat'); %>
+
 
 <!-- importing this script for creating the comments -->
-<script src="/js/home_post_comments.js" ></script>
-<script src="/js/home_posts.js"></script>
-<script src="/js/toggle_likes.js"></script>
+<script src="<%= assetPath('js/home_post_comments.js') %>" ></script>
+
+<script src="<%= assetPath('js/home_posts.js') %>"></script>
+
+<script src="<%= assetPath('js/toggle_likes.js') %>"></script>
+
 <script>
     // this is handling click event on each like button having class .like-button
     //or calling toggleLike () in cclass.
@@ -81,7 +84,7 @@
         let toggleLike = new ToggleLike(self);
     });
 </script>
-<script src="/js/friendship.js"></script>
+<script src="<%= assetPath('js/friendship.js') %>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"
  integrity="sha512-zN6KYOtONNTOGXz0RkWX2EpavN9VdIs+2w+To+fhciFv83YA9maUpi2lzZWrOfKXdFIZZomWufBznkyHi3a8oQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -89,7 +92,7 @@
 
 
 
-<script src="/js/chat_engine.js"></script>
+<script src="<%= assetPath('js/chat_engine.js') %>"></script>
 <% if(locals.user){ %>
 <script>
     new chatEngine('chat-box' , '<%= locals.user.email %>' );
