@@ -57,7 +57,7 @@ if(env.name == 'development'){
 
 
 // middleware for reading form data
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: false}));
 //tell app to use cookie
 app.use(cookieParser());
 
