@@ -39,7 +39,7 @@ const multer  = require('multer')
 const chatServer = require('http').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
-console.log("chat server is listening to port 9000");
+console.log("chat server is listening to port 5000");
 
 const path = require('path');
 

@@ -7,6 +7,7 @@ const rev = require('gulp-rev');
 const uglify = require('gulp-uglify'); 
 
 
+
 let /** @type {import("gulp-imagemin")} */ imagemin;
 let /** @type {import("imagemin-jpegtran")} */ imageminJpegtran;
 let /** @type {import("imagemin-pngquant").default} */ imageminPngquant;
@@ -24,11 +25,9 @@ gulp.task("startup", async () => {
     await startup();
 });
 
-
-
-
 //const imagemin = require('gulp-imagemin');
 const del = require('del');
+
 
 gulp.task('css' , function( done ){
     console.log('minifying css......');
