@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const User = require('../models/users');
 
 const env = require('./environment');
-
+console.log(env.google_callbackURL);
 passport.use(new googleStrategy({
         clientID: env.google_client_id,
         clientSecret: env.google_client_secret,

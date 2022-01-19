@@ -1,6 +1,6 @@
 const express = require('express');
 
-
+var cors = require('cors');
 const env = require('./config/environment');
 
 const logger = require('morgan');
@@ -65,7 +65,7 @@ app.use(cookieParser());
 app.set('layout extractStyles' , true);
 app.set('layout extractScripts' , true);
 
-
+app.use(cors());
 
 // for using static files
 app.use(express.static(__dirname + env.asset_path));
