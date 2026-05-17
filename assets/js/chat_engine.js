@@ -5,7 +5,8 @@ class chatEngine {
     this.chatBox = $(`#${chatBoxId}`);
     this.userEmail = userEmail;
     //emiting connection to server chat_socket.js
-    this.socket = io("http://localhost:5000", {
+    const chatServerUrl = `${window.location.protocol}//${window.location.hostname}:5000`;
+    this.socket = io(chatServerUrl, {
       transports: ["websocket", "polling", "flashsocket"],
     });
 
