@@ -17,6 +17,7 @@ class chatEngine {
 
   connectionHandler() {
     let self = this;
+    // this is reference to obj
 
     this.socket.on("connect", function () {
       // verifying connection emitted by chat_socket.js
