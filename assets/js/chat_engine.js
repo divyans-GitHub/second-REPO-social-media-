@@ -29,7 +29,7 @@ class chatEngine {
       });
       //detecting the user_joined event on client side  from server side
       self.socket.on("user_joined", function (data) {
-        console.log("user has joined the chat", data);
+        console.log("user has joined the chat room: ", data);
       });
 
       $("#send-msg-btn").click(function () {
