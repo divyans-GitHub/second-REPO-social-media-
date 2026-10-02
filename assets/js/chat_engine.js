@@ -33,6 +33,7 @@ class chatEngine {
       });
 
       $("#send-msg-btn").click(function () {
+        // read the message from input field and send it to server side
         let msg = $("#chat-message-input").val();
         if (msg != "") {
           self.socket.emit("send_message", {
