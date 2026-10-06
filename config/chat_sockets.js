@@ -6,7 +6,7 @@ module.exports.chatSockets = function (socketServer) {
   //recieving connection on server side  and emit back to client side
   io.sockets.on("connection", function (socket) {
     console.log("new connection recieved at server side: ", socket.id);
-    //when client disconnect , disconnection event fires
+    //when client disconnects , disconnection event will be fired and we can listen to that event on server side
     socket.on("disconnect", function () {
       console.log("socket disconnected!");
     });
