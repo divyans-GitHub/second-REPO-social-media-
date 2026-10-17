@@ -17,7 +17,7 @@ module.exports.chatSockets = function (socketServer) {
       // join socket to that room(if exists join it otherwise create a room and join it)
       socket.join(data.chatRoom);
 
-      //everyone in chat room including me need to be notified that someone joined this room
+      //everyone in chat room including me need to be notified that someone has joined this room
       io.in(data.chatRoom).emit("user_joined", data);
     });
 
