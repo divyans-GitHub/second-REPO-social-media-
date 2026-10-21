@@ -22,7 +22,7 @@ module.exports.chatSockets = function (socketServer) {
     });
 
     socket.on("send_message", function (data) {
-      io.in(data.chatRoom).emit("recieve_message", data);
+      io.in(data.chatRoom).emit("recieve_message with data: ", data);
     });
   });
 };
